@@ -23,6 +23,14 @@ const App = {
       this.account = accounts[0];
 
       this.refreshBalance();
+
+      this.meta.events.Transfer()
+      .on('data', (event) => {
+          console.log(event);
+          console.log('demo refresh')
+          App.refreshBalance();
+      })
+
     } catch (error) {
       console.error("Could not connect to contract or chain.");
     }
@@ -46,7 +54,7 @@ const App = {
     await sendCoin(receiver, amount).send({ from: this.account });
 
     this.setStatus("Transaction complete!");
-    this.refreshBalance();
+    // this.refreshBalance();
   },
 
   setStatus: function(message) {
@@ -73,4 +81,5 @@ window.addEventListener("load", function() {
   }
 
   App.start();
+
 });
