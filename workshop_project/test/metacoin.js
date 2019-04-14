@@ -36,4 +36,56 @@ contract("MetaCoin", accounts => {
       "Amount wasn't correctly sent to the receiver",
     );
   });
+
+  it("one cannot spend what he does not have", async () => {
+    const instance = await MetaCoin.deployed();
+
+    const account1 = accounts[0];
+    const account2 = accounts[1];
+
+    // get initial balances
+    const initBalance1 = await instance.getBalance.call(account1);
+    const initBalance2 = await instance.getBalance.call(account2);
+
+    // try to send too much coin
+    const amount = initBalance1 + 1;
+    await instance.sendCoin(account2, amount, { from: account1 });
+
+    // get final balances
+    const finalBalance1 = await instance.getBalance.call(account1);
+    const finalBalance2 = await instance.getBalance.call(account2);
+
+    assert.equal(
+      finalBalance1.toNumber(),
+      initBalance1.toNumber(),
+      "Amount wasn't taken from the sender",
+    );
+    assert.equal(
+      finalBalance2.toNumber(),
+      initBalance2.toNumber(),
+      "Amount wasn't sent to the receiver",
+    );
+
+  })
+
+  it('should be named FoxyFoxyFoxy', async () => {
+    const instance = await MetaCoin.deployed();
+    const name = await instance.name.call();
+    assert.equal(
+      name,
+      "FoxyFoxyFoxy",
+      "Name is correct"
+    );
+  })
+
+  it('should have symbol FFF', async () => {
+    const instance = await MetaCoin.deployed();
+    const actual = await instance.symbol.call();
+    assert.equal(
+      actual,
+      "FFF",
+      "Symbol is correct"
+    );
+  })
+
 });

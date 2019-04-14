@@ -6,6 +6,9 @@ pragma solidity >=0.4.21 <0.6.0;
 // token, see: https://github.com/ConsenSys/Tokens. Cheers!
 
 contract MetaCoin {
+    string public constant name = "FoxyFoxyFoxy";
+    string public constant symbol = "FFF";
+
     mapping (address => uint) balances;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
