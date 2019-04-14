@@ -7,6 +7,7 @@ contract("MetaCoin", accounts => {
     assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
   });
 
+
   it("should send coin correctly", async () => {
     const instance = await MetaCoin.deployed();
 
@@ -67,6 +68,32 @@ contract("MetaCoin", accounts => {
     );
 
   })
+
+  it('should pay transaction charge to the instructor', async () => {
+    const instance = await MetaCoin.deployed();
+
+    const account1 = accounts[1];
+    const account2 = accounts[2];
+    const instructor = await instance.instructor.call()
+
+    // get initial balance of the instructor
+    const initBalanceInstructor = await instance.getBalance.call(instructor);
+
+    // send coins from account 1 to 2
+    const amount = 1;
+    await instance.sendCoin(account2, amount, { from: account1 });
+
+    // get final balance of the instructor
+    const finalBalanceInstructor = await instance.getBalance.call(instructor);
+
+    const transactionCharge = await instance.transactionCharge.call()
+
+    assert.equal(
+      finalBalanceInstructor.toNumber(),
+      initBalanceInstructor.toNumber() + transactionCharge,
+      "Transaction charge has been sent to the instructor",
+    );
+  });
 
   it('should be named FoxyFoxyFoxy', async () => {
     const instance = await MetaCoin.deployed();

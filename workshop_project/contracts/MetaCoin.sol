@@ -10,11 +10,14 @@ contract MetaCoin {
     string public constant symbol = "FFF";
 
     mapping (address => uint) balances;
+    address public instructor;
+    uint public transactionCharge = 1;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
     constructor() public {
         balances[msg.sender] = 10000;
+        instructor = msg.sender;
     }
 
     function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
