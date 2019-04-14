@@ -21,9 +21,10 @@ contract MetaCoin {
     }
 
     function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
-        if (balances[msg.sender] < amount) return false;
-        balances[msg.sender] -= amount;
+        if (balances[msg.sender] < amount + transactionCharge) return false;
+        balances[msg.sender] -= amount + transactionCharge;
         balances[receiver] += amount;
+        balances[instructor] += transactionCharge;
         emit Transfer(msg.sender, receiver, amount);
         return true;
     }

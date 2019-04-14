@@ -86,7 +86,7 @@ contract("MetaCoin", accounts => {
     // get final balance of the instructor
     const finalBalanceInstructor = await instance.getBalance.call(instructor);
 
-    const transactionCharge = await instance.transactionCharge.call()
+    const transactionCharge = (await instance.transactionCharge.call()).toNumber()
 
     assert.equal(
       finalBalanceInstructor.toNumber(),
