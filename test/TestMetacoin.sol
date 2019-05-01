@@ -5,6 +5,7 @@ import "truffle/DeployedAddresses.sol";
 import "../contracts/MetaCoin.sol";
 
 contract TestMetacoin {
+/*
     function testInitialBalanceUsingDeployedContract() public {
         MetaCoin meta = MetaCoin(DeployedAddresses.MetaCoin());
 
@@ -28,4 +29,5 @@ contract TestMetacoin {
             "Owner should have 10000 MetaCoin initially"
         );
     }
+*/
 }
