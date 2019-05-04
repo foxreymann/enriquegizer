@@ -20,9 +20,13 @@ contract("MetaCoin", accounts => {
   it('pay a charge to building owner and service provider', async() => {
     const instance = await MetaCoin.deployed();
 
+    // get initial balances
+
     // make payment
     const txResult = await instance.payCharge({from: accounts[2], value: web3.utils.toWei('2', 'ether')})
     console.log(txResult)
+
+    // get final balances
 
   })
 })
