@@ -13,17 +13,19 @@ contract MetaCoin is Ownable {
     address[] public chargesArr;
     */
 
-    address public buildingOwner;
+    address payable public buildingOwner;
     uint public percentmille = 2000;
 
-    constructor() public {
-    }
+    constructor() public {}
 
-    function setBuidlingOwner(address _buildingOwner) onlyOwner public {
+    function setBuidlingOwner(address payable _buildingOwner) onlyOwner public {
       buildingOwner = _buildingOwner;
     }
 
     function payCharge() payable public {
+      uint serviceCharge = msg.value / 100000 * percentmille;
+      buildingOwner.transfer(msg.value - serviceCharge);
+      owner.transfer(serviceCharge);
     }
 
 }
