@@ -12,6 +12,7 @@ contract MetaCoin is Ownable {
     mapping (address => Charge) charges;
     address[] public chargesArr;
     */
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
     address payable public buildingOwner;
     uint public percentmille = 2000;
@@ -26,6 +27,7 @@ contract MetaCoin is Ownable {
       uint serviceCharge = msg.value / 100000 * percentmille;
       buildingOwner.transfer(msg.value - serviceCharge);
       owner.transfer(serviceCharge);
+      emit Transfer(owner, buildingOwner, msg.value);
     }
 
 }

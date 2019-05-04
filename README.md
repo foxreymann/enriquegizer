@@ -1,4 +1,4 @@
 # Test
 
 `$ truffle migrate --network ganache --reset`
-`$ truffle test`
+`$ truffle test --newwork ganache`
