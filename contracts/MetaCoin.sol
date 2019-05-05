@@ -3,15 +3,7 @@ pragma solidity >=0.4.21 <0.6.0;
 import './Ownable.sol';
 
 contract MetaCoin is Ownable {
-    /*
-    struct Charge {
-      address box;
-      uint value;
-    }
 
-    mapping (address => Charge) charges;
-    address[] public chargesArr;
-    */
     event chargePaid(address indexed beneficiary, uint256 amount, uint256 gasprice);
 
     address payable public buildingOwner;
