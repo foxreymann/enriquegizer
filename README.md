@@ -1,4 +1,5 @@
-# Test
+# Run End To End Tests
 
-`$ truffle migrate --network ganache --reset`
-`$ truffle test --newwork ganache`
+1. run ganache with default settings  
+1. `$ truffle migrate --network ganache --reset`  
+1. `$ truffle test --newwork ganache`
