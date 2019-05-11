@@ -9,14 +9,16 @@
 - [Install Truffle](https://truffleframework.com/docs/truffle/getting-started/installation)
 - [Install Ganache](https://truffleframework.com/ganache)
 - Clone this GitHub repository
-- `cd enriquegizer`
+- Start Ganache
+- Create new workspace in Ganache. In 'Workspace' tab import `truffle-config.js` file from cloned repository.
 
-# Run End To End Tests
+![](./docs/ganache-1.png)
+![](./docs/ganache-2.png)
 
-- run ganache with default settings  
-- `$ truffle migrate --network ganache --reset`  
-- `$ truffle test --newwork ganache`
-
-# Task
-
-how to set up?
+- Save the workspace and run it. In Ganache UI you can inspect state of your local Ehtereum blockchain.
+- Open your terminal
+- `$ cd enriquegizer`
+- `$ truffle console --netowrk=ganache`
+- In truffle console:
+  - Run `migrate` to deploy contract to your Ganache network
+  - Run `test` to run end to end tests
